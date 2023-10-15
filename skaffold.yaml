@@ -1,0 +1,60 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/*
+build:
+  # local:
+  #   push: false
+  googleCloudBuild:
+    projectId: ultra-task-402110
+  artifacts:
+    - image: us.gcr.io/ultra-task-402110/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync: 
+        manual:
+          - src: 'src/**/*.js'
+            dest: .
+    - image: us.gcr.io/ultra-task-402110/posts
+      context: posts
+      docker:
+        dockerfile: Dockerfile
+      sync: 
+        manual:
+          - src: '*.js'
+            dest: .
+    - image: us.gcr.io/ultra-task-402110/comments
+      context: comments
+      docker:
+        dockerfile: Dockerfile
+      sync: 
+        manual:
+          - src: '*.js'
+            dest: .
+    - image: us.gcr.io/ultra-task-402110/query
+      context: query
+      docker:
+        dockerfile: Dockerfile
+      sync: 
+        manual:
+          - src: '*.js'
+            dest: .
+    - image: us.gcr.io/ultra-task-402110/moderation
+      context: moderation
+      docker:
+        dockerfile: Dockerfile
+      sync: 
+        manual:
+          - src: '*.js'
+            dest: .
+    - image: us.gcr.io/ultra-task-402110/event-bus
+      context: event-bus
+      docker:
+        dockerfile: Dockerfile
+      sync: 
+        manual:
+          - src: '*.js'
+            dest: .
