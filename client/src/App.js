@@ -5,7 +5,7 @@ import Post from './components/Post';
 import PostList from './components/PostList';
 
 function App() {
-  console.log("Started......")
+  console.log("Started.........")
   const [posts, setPosts] = useState({})
   const fetchPosts = async () => {
     const posts = await axios.get("http://posts.com/posts")

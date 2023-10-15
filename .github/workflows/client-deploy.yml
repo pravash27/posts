@@ -16,11 +16,10 @@ jobs:
               run: cd client && docker build -t ${{secrets.GKE_REGISTRY_URL}}/${{secrets.GKE_PROJECT_ID}}/client .
 
             - name: Setup google cloud
-              uses: google-github-actions/setup-gcloud@v0
+              uses: google-github-actions/auth@v1
               with:
                 project_id: ${{secrets.GKE_PROJECT_ID}} 
-                service_account_key: ${{secrets.GKE_APPLICATION_CREDENTIALS}}
-                export_default_credentials: true
+                credentials_json: ${{secrets.GKE_APPLICATION_CREDENTIALS}}
             
             - name: Push docker image
               env: 
