@@ -25,6 +25,6 @@ jobs:
               env: 
                 GOOGLE_PROJECT: ${{secrets.GKE_PROJECT_ID}}
               run: 
-                gcloud auth configure-docker us-central1-docker.pkg.dev &&
+                gcloud auth activate-service-account 203778240088-compute@developer.gserviceaccount.com --key-file=${{secrets.GKE_APPLICATION_CREDENTIALS}} &&
                 docker push ${{secrets.GKE_REGISTRY_URL}}/${{secrets.GKE_PROJECT_ID}}/client
             
