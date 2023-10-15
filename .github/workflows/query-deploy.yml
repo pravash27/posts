@@ -1,10 +1,10 @@
-name: deploy-client
+name: deploy-query
 on:
     push:
         branches:
             - master
         # paths: 
-        #     - 'client/**'
+        #     - 'query/**'
 jobs:
     build:
         runs-on: ubuntu-latest
@@ -13,7 +13,7 @@ jobs:
               uses: actions/checkout@v2
             
             - name: build docker image
-              run: cd client && docker build -t ${{secrets.GKE_REGISTRY_URL}}/${{secrets.GKE_PROJECT_ID}}/client .
+              run: cd query && docker build -t ${{secrets.GKE_REGISTRY_URL}}/${{secrets.GKE_PROJECT_ID}}/query .
 
             - name: Setup google cloud
               uses: google-github-actions/auth@v1
@@ -26,5 +26,5 @@ jobs:
                 GOOGLE_PROJECT: ${{secrets.GKE_PROJECT_ID}}
               run: 
                 gcloud auth configure-docker &&
-                docker push ${{secrets.GKE_REGISTRY_URL}}/${{secrets.GKE_PROJECT_ID}}/client
+                docker push ${{secrets.GKE_REGISTRY_URL}}/${{secrets.GKE_PROJECT_ID}}/query
             
