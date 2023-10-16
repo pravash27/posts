@@ -35,5 +35,5 @@ jobs:
                 location: ${{secrets.GKE_LOCATION}}
             
             - name: Deploy/Restart GKE Deployemnt
-              run: kubectl rollout restart deployment client-depl
+              run: kubectl rollout restart deployment comments-depl
             
