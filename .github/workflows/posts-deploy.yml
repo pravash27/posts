@@ -27,4 +27,14 @@ jobs:
               run: 
                 gcloud auth configure-docker &&
                 docker push ${{secrets.GKE_REGISTRY_URL}}/${{secrets.GKE_PROJECT_ID}}/posts
+                          
+            - name: Connect to GKE
+              uses: google-github-actions/get-gke-credentials@v0
+              with:
+                cluster_name: ${{secrets.GKE_CLUSTER}}
+                location: ${{secrets.GKE_LOCATION}}
+                
+            - name: Deploy/Restart GKE Deployemnt
+              run: kubectl rollout restart deployment posts-depl
+              
             
