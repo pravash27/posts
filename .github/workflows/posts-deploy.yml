@@ -3,8 +3,8 @@ on:
     push:
         branches:
             - master
-        # paths: 
-        #     - 'posts/**'
+        paths: 
+            - 'posts/**'
 jobs:
     build:
         runs-on: ubuntu-latest

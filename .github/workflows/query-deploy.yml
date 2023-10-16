@@ -3,8 +3,8 @@ on:
     push:
         branches:
             - master
-        # paths: 
-        #     - 'query/**'
+        paths: 
+            - 'query/**'
 jobs:
     build:
         runs-on: ubuntu-latest

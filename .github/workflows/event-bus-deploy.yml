@@ -3,8 +3,8 @@ on:
     push:
         branches:
             - master
-        # paths: 
-        #     - 'event-bus/**'
+        paths: 
+            - 'event-bus/**'
 jobs:
     build:
         runs-on: ubuntu-latest
