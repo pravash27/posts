@@ -6,7 +6,7 @@ on:
         paths: 
             - 'comments/**'
     workflow_run: 
-      workflows: ["deploy-client"] 
+      workflows: ["terraform-deploy"] 
       types:
         - completed
       
