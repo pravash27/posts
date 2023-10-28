@@ -3,8 +3,8 @@ on:
     push:
         branches: 
             - master
-        paths: 
-            - 'terraform/**'
+        # paths: 
+        #     - 'terraform/**'
 jobs:
     build:
         runs-on: ubuntu-latest
@@ -25,4 +25,4 @@ jobs:
                TF_API_TOKEN: ${{ secrets.TF_TOKEN }}
             
             - name: Terraform commands
-              run: terraform plan
+              run: cd terraform/infra && terraform plan
