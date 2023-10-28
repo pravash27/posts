@@ -25,4 +25,4 @@ jobs:
                TF_API_TOKEN: ${{ secrets.TF_TOKEN }}
             
             - name: Terraform commands
-              run: cd terraform/infra && terraform plan
+              run: cd terraform/infra && terraform init && terraform plan
