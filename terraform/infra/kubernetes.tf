@@ -1,5 +1,5 @@
 resource "google_container_cluster" "primary" {
-  name = "terraform-cluster"
+  name = var.gke_cluster
   location = var.gcp_zone
   remove_default_node_pool = true
   initial_node_count = 1
@@ -33,4 +33,8 @@ resource "google_container_cluster" "primary" {
     master_ipv4_cidr_block = "172.16.0.0/28"
   }
   deletion_protection = false
+}
+
+output "cluster_name" {
+  value = google_container_cluster.primary.name
 }

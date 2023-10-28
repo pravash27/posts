@@ -1,5 +1,5 @@
 resource "google_service_account" "kubernetes" {
-  account_id = "kubernetes"
+  account_id = var.gke_account
 }
 
 resource "google_project_iam_member" "kubernetes" {
@@ -20,7 +20,7 @@ resource "google_container_node_pool" "default" {
 
   node_config {
     preemptible = false
-    machine_type = "n1-standard-1"
+    machine_type = var.machine_type
 
     labels = {
       role = "general"
@@ -31,3 +31,4 @@ resource "google_container_node_pool" "default" {
     oauth_scopes = [ "https://www.googleapis.com/auth/cloud-platform" ]
   }
 }
+
