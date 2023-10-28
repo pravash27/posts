@@ -37,5 +37,5 @@ jobs:
 
             - name: Terraform Apply
               if: steps.plan.outputs.has_changes == 'true'
-              run: terraform apply tfplan --auto-approve && terraform output cluster_name
+              run: terraform apply --auto-approve tfplan && terraform output cluster_name
                
