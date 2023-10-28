@@ -30,6 +30,7 @@ jobs:
             - name: Terraform Plan
               id: plan
               run: |
+                   cd terraform/infra
                    terraform plan -out=tfplan
                    echo "::set-output name=has_changes::$(terraform plan -out=tfplan -detailed-exitcode | grep -E '^Changes\? false$' || echo 'true')"
               continue-on-error:  true
