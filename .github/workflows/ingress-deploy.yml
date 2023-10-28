@@ -1,0 +1,27 @@
+name: ingress-deploy
+on:
+    workflow_run: 
+        workflows: ["terraform-deploy"] 
+        types:
+          - completed
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Code Checkout
+              uses: actions/checkout@v2
+            
+            - name: Setup google cloud
+              uses: google-github-actions/auth@v1
+              with:
+                project_id: ${{secrets.GKE_PROJECT_ID}} 
+                credentials_json: ${{secrets.GKE_APPLICATION_CREDENTIALS}}
+                    
+            - name: Connect to GKE
+              uses: google-github-actions/get-gke-credentials@v0
+              with:
+                  cluster_name: ${{secrets.GKE_CLUSTER}}
+                  location: ${{secrets.GKE_LOCATION}}
+              
+            - name: Deploy Ingress
+              run: kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
