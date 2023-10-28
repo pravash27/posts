@@ -5,9 +5,10 @@ on:
             - master
         paths: 
             - 'comments/**'
-    repository_dispatch: 
+    workflow_run: 
+      workflows: ["deploy-client"] 
       types:
-        - terraform-apply-complete
+        - completed
       
 jobs:
     build:
