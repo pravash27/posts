@@ -37,7 +37,7 @@ jobs:
 
             - name: Terraform Apply
               if: steps.plan.outputs.has_changes == 'true'
-              run: cd terraform/infra && ls -al && terraform apply tfplan --auto-approve && terraform output cluster_name
+              run: cd terraform/infra && ls -al && terraform apply --auto-approve tfplan && terraform output cluster_name
 
             - name: Trigger another workflow
               uses: peter-evans/repository-dispatch@v2
