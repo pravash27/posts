@@ -12,7 +12,7 @@ jobs:
             - name: Deploy to GCP
               uses: actions/checkout@v2
 
-            - name: Connect to GCP
+            - name: Configure GCP
               uses: google-github-actions/auth@v1
               with:
                 project_id:  ${{secrets.GKE_PROJECT_ID}} 
@@ -24,5 +24,17 @@ jobs:
               env:
                TF_API_TOKEN: ${{ secrets.TF_TOKEN }}
             
-            - name: Terraform commands
-              run: cd terraform/infra && terraform init && terraform plan
+            - name: Configure Terraform
+              run: cd terraform/infra && terraform init
+
+            - name: Terraform Plan
+              id: plan
+              run: |
+                   terraform plan -out=tfplan
+                   echo "::set-output name=has_changes::$(terraform plan -out=tfplan -detailed-exitcode | grep -E '^Changes\? false$' || echo 'true')"
+              continue-on-error:  true
+
+            - name: Terraform Apply
+              if: steps.plan.outputs.has_changes == 'true'
+              run: echo 'Test'
+               
