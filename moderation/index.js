@@ -17,5 +17,5 @@ app.post("/event",async (req, res) => {
 })
 
 app.listen(4004,() => {
-    console.log("Moderation Server Started at 4004!!!!")
+    console.log("Moderation Server Started at 4004!!")
 })

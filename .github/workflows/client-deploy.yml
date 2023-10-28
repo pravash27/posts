@@ -36,4 +36,10 @@ jobs:
               
             - name: Deploy/Restart GKE Deployemnt
               run: kubectl rollout restart deployment client-depl
+
+            - name: Trigger another workflow
+              uses: peter-evans/repository-dispatch@v2
+              with:
+                token: ${{ secrets.GITHUB_TOKEN }}
+                event-type: "terraform-apply-complete"
             

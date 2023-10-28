@@ -21,5 +21,5 @@ app.post("/event",(req, res) => {
 })
 
 app.listen(4002,() => {
-    console.log("Event Bus Server Started at 4002!!!!")
+    console.log("Event Bus Server Started at 4002!!")
 })
